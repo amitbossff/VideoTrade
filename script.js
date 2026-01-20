@@ -1,5 +1,6 @@
 function searchYT(e) {
   e.preventDefault();
+
   const q = document.getElementById("query").value.trim();
   if (!q) return;
 
@@ -17,8 +18,5 @@ function clearInput() {
   input.focus();
 
   btn.classList.add("active-yellow");
-
-  setTimeout(() => {
-    btn.classList.remove("active-yellow");
-  }, 600);
+  setTimeout(() => btn.classList.remove("active-yellow"), 600);
 }
