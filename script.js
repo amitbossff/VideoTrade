@@ -1,3 +1,4 @@
+
 function searchYT(e) {
   e.preventDefault();
 
@@ -19,4 +20,14 @@ function clearInput() {
 
   btn.classList.add("active-yellow");
   setTimeout(() => btn.classList.remove("active-yellow"), 600);
+}
+
+function moveUp() {
+  document.getElementById("appShell").style.transform =
+    "translateY(-100px)";
+}
+
+function moveDown() {
+  document.getElementById("appShell").style.transform =
+    "translateY(0)";
 }
