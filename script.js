@@ -24,7 +24,7 @@ function clearInput() {
 
 function moveUp() {
   document.getElementById("appShell").style.transform =
-    "translateY(-100px)";
+    "translateY(-110px)";
 }
 
 function moveDown() {
