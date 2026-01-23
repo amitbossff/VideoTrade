@@ -119,3 +119,8 @@ body {
   opacity: 0.6;
   margin-top: 18px;
 }
+
+body.keyboard-open .card-ui {
+  transform: translateY(-80px);
+  transition: transform 0.1s ease;
+}
