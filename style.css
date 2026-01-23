@@ -121,6 +121,6 @@ body {
 }
 
 body.keyboard-open .card-ui {
-  transform: translateY(-105px);
+  transform: translateY(-115px);
   transition: transform 0.1s ease;
 }
