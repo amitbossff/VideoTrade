@@ -22,13 +22,3 @@ function toggleClear() {
   const btn = document.getElementById("clearBtn");
   btn.style.display = input.value ? "flex" : "none";
 }
-
-const input = document.getElementById("query");
-
-input.addEventListener("focus", () => {
-  document.body.classList.add("keyboard-open");
-});
-
-input.addEventListener("blur", () => {
-  document.body.classList.remove("keyboard-open");
-});
