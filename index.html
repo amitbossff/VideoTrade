@@ -58,10 +58,7 @@
         </button>
       </form>
 
-           <p class="footer-text" style="pointer-events:none;">
-        🔴 Testing : <span id="counter">0</span>
-           </p>
-      
+          
 
     </div>
   </div>
@@ -80,28 +77,6 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
 }
 </script>
-
-    <script>
-    const COUNTER_URL =
-      'https://amixxx.amitkr933474.workers.dev';
-
-    function updateCounter() {
-      fetch(COUNTER_URL + '?ts=' + Date.now(), {
-        cache: 'no-store'
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("counter").innerText = data.count;
-      })
-      .catch(() => {});
-    }
-
-    // First load
-    updateCounter();
-
-    // 🔴 Update every 5 seconds (LIVE feel)
-    setInterval(updateCounter, 5000);
-    </script>
 
 </body>
 </html>
