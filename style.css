@@ -1,19 +1,47 @@
+
 body {
+  margin: 0;
+  min-height: 100svh;
   background: linear-gradient(135deg, #141e30, #243b55);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .card-ui {
   background: #fff;
   border-radius: 22px;
-  padding: 30px 24px;
+  padding: 26px 22px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.25);
 }
 
-.title {
-  font-weight: 700;
+.header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
+.brand-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ff0000;
+}
+
+.brand-name i {
+  font-size: 24px;
+}
 
 .search-box {
   position: relative;
@@ -30,7 +58,7 @@ body {
 }
 
 .search-box input {
-  width: 100%;
+  width: 60%;
   height: 52px;
   padding: 0 52px;
   border-radius: 999px;
@@ -47,7 +75,6 @@ body {
   box-shadow: 0 0 0 4px rgba(255,75,43,0.18);
 }
 
-
 .clear-btn {
   position: absolute;
   top: 50%;
@@ -58,35 +85,20 @@ body {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-
   background: linear-gradient(135deg, #ff416c, #ff4b2b);
   color: #fff;
-
   display: none;
   align-items: center;
   justify-content: center;
-
-  box-shadow: 0 6px 12px rgba(255,75,43,0.35);
-  transition: 0.25s;
-}
-
-.clear-btn i {
-  font-size: 14px;
 }
 
 .clear-btn:hover {
   transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 10px 20px rgba(255,75,43,0.5);
 }
-
-.clear-btn:active {
-  transform: translateY(-50%) scale(0.92);
-}
-
 
 .btn-search {
   margin-top: 18px;
-  width: 80%;
+  width: 70%;
   height: 45px;
   background: linear-gradient(135deg, #ff416c, #ff4b2b);
   color: #fff;
@@ -98,11 +110,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 
-  transition: 0.25s;
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
+  transition: 0.25s;
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-search:hover {
@@ -110,11 +126,13 @@ body {
   box-shadow: 0 12px 24px rgba(255,75,43,0.45);
 }
 
-.btn-search:active {
-  transform: scale(0.96);
+.btn-search:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .footer-text {
+  text-align: center;
   font-size: 12px;
   opacity: 0.6;
   margin-top: 18px;
