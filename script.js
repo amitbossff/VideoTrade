@@ -1,76 +1,49 @@
-const searchBox = document.getElementById("searchBox");
-const clearBtn = document.getElementById("clearBtn");
-const pasteBtn = document.getElementById("pasteBtn");
+let filter = "EgIIAQ%3D%3D";
+const q = document.getElementById("q");
+const clipModal = document.getElementById("clipModal");
 
-const popupOverlay = document.getElementById("popupOverlay");
-const popupClose = document.getElementById("popupClose");
-
-let lastValue = "";
-
-function canPaste() {
-  return navigator.clipboard && typeof navigator.clipboard.readText === "function";
-}
-
-
-function doSearch() {
-  const value = searchBox.value.trim();
-  if (!value || value === lastValue) return;
-
-  lastValue = value;
-
-  const query = encodeURIComponent(value);
-  const lastHourFilter = "EgIIAQ%3D%3D";
-
-  window.location.href =
-    `https://www.youtube.com/results?search_query=${query}&sp=${lastHourFilter}`;
-
-  setTimeout(() => {
-    searchBox.value = "";
-    clearBtn.style.display = "none";
-    lastValue = "";
-  }, 300);
-}
-
-// Input paste/type → redirect
-searchBox.addEventListener("input", () => {
-  clearBtn.style.display = searchBox.value ? "flex" : "none";
-  doSearch();
+document.querySelectorAll(".filter").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    filter = btn.getAttribute("data");
+    navigator.vibrate && navigator.vibrate(10);
+  };
 });
 
-// Paste button
-pasteBtn.addEventListener("click", async () => {
-  if (!canPaste()) {
-    popupOverlay.style.display = "flex";
-    return;
-  }
+function openModal(){
+  clipModal.style.display="flex";
+}
+function closeModal(){
+  clipModal.style.display="none";
+}
 
-  try {
+document.getElementById("pasteBtn").onclick = async () => {
+  try{
     const text = await navigator.clipboard.readText();
-    if (!text) return;
+    if(text && text.trim()){
+      q.value = "";
+      go(text.trim());
+    }else{
+      openModal();
+    }
+  }catch{
+    openModal();
+  }
+};
 
-    searchBox.value = text;
-    clearBtn.style.display = "flex";
-    searchBox.dispatchEvent(new Event("input"));
-
-  } catch {
-    popupOverlay.style.display = "flex";
+q.addEventListener("input",e=>{
+  const v = e.target.value.trim();
+  if(v.length>=1){
+    q.value="";
+    go(v);
   }
 });
 
-
-popupClose.addEventListener("click", () => {
-  popupOverlay.style.display = "none";
-});
-
-popupOverlay.addEventListener("click", (e) => {
-  if (e.target === popupOverlay) {
-    popupOverlay.style.display = "none";
-  }
-});
-
-clearBtn.addEventListener("click", () => {
-  searchBox.value = "";
-  clearBtn.style.display = "none";
-  lastValue = "";
-  searchBox.focus();
-});
+function go(v){
+  navigator.vibrate && navigator.vibrate(10);
+  setTimeout(()=>{
+    location.href =
+      `https://www.youtube.com/results?search_query=${encodeURIComponent(v)}&sp=${filter}`;
+  },260);
+}

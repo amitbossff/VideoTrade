@@ -1,83 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>VIDEO COMUNICATION</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Latest Videos Finder | AmitTG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#dc2626">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
 <body>
 
-  <div class="container">
-    <div class="card-ui">
+<div class="container">
 
-      <div class="header">
-        <span class="brand-name">
-          <i class="bi bi-youtube"></i>
-          AmitTG
-        </span>
-      </div>
+  <header class="header">
+    <div class="logo"><i class="bi bi-play-fill"></i></div>
+    <h1 class="title">Radhe Radhe</h1>
+    <p class="sub">AmitTG</p>
+  </header>
 
-      <div class="search-box">
-        <span class="search-icon">
-          <i class="bi bi-link-45deg"></i>
-        </span>
-
-        <input
-          type="text"
-          id="searchBox"
-          placeholder="Paste or type here..."
-          autocomplete="off"
-        >
-
-        <button class="clear-btn" id="clearBtn">
-          <i class="bi bi-x"></i>
-        </button>
-      </div>
-
-     
-      <button class="btn-search glow-btn" id="pasteBtn">
-        <i class="bi bi-clipboard"></i>
-        Paste <span class="app-only">(Browser / App)</span>
-      </button>
-
-      <div class="footer-text">
-        Powered by YouTube
-      </div>
-
+  <main class="card">
+    <div class="input-wrap">
+      <i class="bi bi-search"></i>
+      <input id="q" placeholder="Paste here...">
     </div>
-  </div>
 
- 
-  <div class="popup-overlay" id="popupOverlay">
-    <div class="popup-box">
-      <button class="popup-close" id="popupClose">❌</button>
-      <p>
-        Paste feature is not supported<br>
-        in this browser
+    <button id="pasteBtn">
+      <i class="bi bi-clipboard-check"></i> Paste & Search
+    </button>
 
-If You Needed To paste Direct Then Go To Chrome Browser And Add To Home Screen Install 💓
-      </p>
+    <div class="filters">
+      <div class="filter active" data="EgIIAQ%3D%3D">
+        <i class="bi bi-clock"></i> Hour
+      </div>
+      <div class="filter" data="EgQIAhAB">
+        <i class="bi bi-calendar"></i> Today
+      </div>
+      <div class="filter" data="EgQIAxAB">
+        <i class="bi bi-calendar-week"></i> Week
+      </div>
     </div>
+  </main>
+
+  <footer class="footer">
+    Regards • Video Trade
+  </footer>
+
+</div>
+
+<div class="modal-overlay" id="clipModal">
+  <div class="modal">
+    <div class="modal-icon">📋</div>
+    <h3>Clipboard Access Required</h3>
+    <p>Please paste manually into the search box.</p>
+    <button onclick="closeModal()">Got it</button>
   </div>
+</div>
 
-  <script src="script.js"></script>
-
- 
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("sw.js");
-    }
-  </script>
-
+<script src="script.js"></script>
 </body>
 </html>
