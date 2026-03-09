@@ -1,246 +1,264 @@
+
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Communication</title>
-
-      <link rel="manifest" href="manifest.json">
-
-<link rel="preconnect" href="https://cdn.tailwindcss.com">
-<link rel="preconnect" href="https://cdn.jsdelivr.net">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="dns-prefetch" href="https://www.youtube.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-<style>
-body{
-    font-family:'Inter',sans-serif;
-    background: radial-gradient(circle at top,#1a0d00,#000000 70%);
-    opacity:0;
-    transition:opacity .4s ease;
-}
-.title-font{ font-family:'Anton',sans-serif; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Comunication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-4">
 
-<body class="min-h-screen flex items-center justify-center text-white p-4">
-
-<div class="w-full max-w-xl glass p-10 rounded-3xl shadow-2xl text-center backdrop-blur-xl border border-orange-500/20">
-
-    <h1 data-aos="zoom-in"
-        class="title-font text-6xl tracking-widest mb-6 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 bg-clip-text text-transparent">
-        Radhe Radhe 
-    </h1>
-
-    
-    <div class="flex justify-center mb-6 gap-2" data-aos="fade-up">
-        <button id="modeHour" class="btn btn-sm btn-warning rounded-full">
-            Last Hour
-        </button>
-        <button id="modeToday" class="btn btn-sm btn-outline btn-warning rounded-full">
-            Today
-        </button>
-    </div>
-
-    
-    <div class="flex mb-6" data-aos="fade-up">
-        <input 
-            id="searchBox"
-            type="text"
-            placeholder="Paste here..."
-            class="input input-bordered w-full rounded-l-full bg-white/10 focus:border-orange-500 focus:outline-none"
-        >
-        <button 
-            id="pasteBtn"
-            class="btn rounded-r-full bg-gradient-to-r from-blue-500 to-blue-700 border-none active:scale-95 transition"
-        >
-            <i class="bi bi-clipboard text-xl"></i>
-        </button>
-    </div>
-
-    <button id="redirectBtn"
-        class="btn hidden rounded-full bg-gradient-to-r from-orange-500 to-red-500 border-none animate-pulse">
-        <span class="loading loading-spinner"></span>
-        Searching...
-    </button>
-
-    <div class="mt-6 text-sm opacity-80">
-        Today Searches:
-        <span id="dailyCount" class="text-orange-400 font-bold text-lg">0</span>
-
-        <div id="countdown" class="text-xs mt-1 text-gray-400"></div>
-
-        <div class="mt-2 text-gray-500 text-xs">
-            Regards • Video Trade 
+    <div class="w-full max-w-sm">
+        
+        
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold">Radhe<span class="text-red-600">Radhe</span></h1>
+            <p class="text-zinc-500 text-sm">Regards • Video Trade</p>
         </div>
+
+        
+        <div class="bg-zinc-900 rounded-xl p-1 border border-zinc-800 mb-4">
+            <div class="grid grid-cols-3 gap-1">
+                <button id="btnAndroid" onclick="setPlatform('android')" class="py-2 px-3 rounded-lg bg-zinc-800 text-zinc-400 font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993.0001.5511-.4482.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.9973-3.4592a.416.416 0 00-.1521-.5676.416.416 0 00-.5676.1521l-2.0225 3.503C15.5902 8.4797 13.8535 8.158 12 8.158c-1.8535 0-3.5902.3217-5.1364.8989L4.841 5.5537a.416.416 0 00-.5676-.1521.416.416 0 00-.1521.5676l1.9973 3.4592C2.6889 11.1867.3432 14.6589.3432 18.6617h23.3136c0-4.0028-2.3457-7.475-5.7754-9.3403"/>
+                    </svg>
+                    <span class="hidden sm:inline">Android</span>
+                </button>
+                <button id="btnPC" onclick="setPlatform('pc')" class="py-2 px-3 rounded-lg bg-zinc-800 text-zinc-400 font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="hidden sm:inline">PC</span>
+                </button>
+                <button id="btnIOS" onclick="setPlatform('ios')" class="py-2 px-3 rounded-lg bg-zinc-800 text-zinc-400 font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    <span class="hidden sm:inline">iOS</span>
+                </button>
+            </div>
+        </div>
+
+       
+        <div class="grid grid-cols-2 gap-2 mb-4">
+            <button id="btnHour" onclick="setMode('hour')" class="py-3 px-4 rounded-xl bg-red-600 text-white font-medium text-sm transition-all active:scale-95">
+                Last Hour
+            </button>
+            <button id="btnToday" onclick="setMode('today')" class="py-3 px-4 rounded-xl bg-zinc-800 text-zinc-400 font-medium text-sm hover:bg-zinc-700 transition-all active:scale-95">
+                Today
+            </button>
+        </div>
+
+        
+        <div class="relative">
+            
+            <div class="bg-zinc-900 rounded-2xl border border-zinc-800 focus-within:border-zinc-600 transition-colors overflow-hidden">
+                <div class="flex items-center px-1">
+                    <div class="pl-4 pr-2 text-zinc-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <input type="text" id="searchBox" placeholder="Search Your Queries..." 
+                        class="flex-1 bg-transparent px-2 py-4 text-white placeholder-zinc-500 outline-none text-base font-medium"
+                        autocomplete="off">
+                    <button onclick="pasteIt()" class="p-3 text-zinc-500 hover:text-white hover:bg-zinc-800 rounded-xl transition-all mr-1" title="Paste from clipboard">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+           
+            <div class="mt-3 text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
+                    <span class="text-zinc-500 text-xs">Current mode</span>
+                    <span class="text-zinc-600">•</span>
+                    <span id="modeSummary" class="text-sm font-medium text-green-400">Android • Last Hour</span>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="flex justify-center gap-8 mt-6 text-center">
+            <div>
+                <div class="text-xl font-bold text-red-600" id="count">0</div>
+                <div class="text-xs text-zinc-600">Today</div>
+            </div>
+            <div>
+                <div class="text-lg font-mono text-white" id="timer">--:--</div>
+                <div class="text-xs text-zinc-600">Reset</div>
+            </div>
+        </div>
+
     </div>
 
-</div>
+    <script>
+        const FILTERS = {
+            hour: "EgIIAQ%253D%253D",
+            today: "EgIIAg%253D%253D"
+        };
+        
+        const SCHEMES = {
+            android: "vnd.youtube",
+            ios: "youtube",
+            pc: "https://www.youtube.com"
+        };
+        
+        let currentMode = localStorage.getItem('htMode') || 'hour';
+        let currentPlatform = localStorage.getItem('htPlatform') || 'android';
+        let redirecting = false;
 
-<div id="toast" class="toast toast-top toast-end hidden">
-    <div class="alert alert-warning">
-        <span>Clipboard permission denied.</span>
-    </div>
-</div>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateButtons();
+            updatePlatformButtons();
+            updateModeSummary();
+            loadCount();
+            updateTimer();
+            setInterval(updateTimer, 60000);
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+            const box = document.getElementById('searchBox');
 
-<script>
-window.addEventListener("load",()=>{
-    document.body.style.opacity="1";
-    if(typeof AOS!=="undefined"){ AOS.init({duration:600,once:true}); }
-});
-</script>
+            box.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const val = box.value.trim();
+                    if (val) openApp(val);
+                }
+            });
 
-<script>
-(function(){
+            box.addEventListener('input', (e) => {
+                const val = e.target.value.trim();
+                if (val.length >= 3) {
+                    setTimeout(() => openApp(val), 300);
+                }
+            });
 
-const searchBox = document.getElementById("searchBox");
-const pasteBtn = document.getElementById("pasteBtn");
-const redirectBtn = document.getElementById("redirectBtn");
-const dailyCount = document.getElementById("dailyCount");
-const countdown = document.getElementById("countdown");
-const toast = document.getElementById("toast");
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    redirecting = false;
+                    box.value = '';
+                    loadCount();
+                }
+            });
+        });
 
-const modeHour = document.getElementById("modeHour");
-const modeToday = document.getElementById("modeToday");
-
-const filters = {
-    hour:"EgIIAQ%3D%3D",
-    today:"EgIIAg%3D%3D"
-};
-
-let currentMode = localStorage.getItem("videoTradeMode") || "hour";
-let redirecting = false;
-
-
-function updateModeUI(){
-    if(currentMode==="hour"){
-        modeHour.classList.remove("btn-outline");
-        modeHour.classList.add("btn-warning");
-        modeToday.classList.add("btn-outline");
-    }else{
-        modeToday.classList.remove("btn-outline");
-        modeToday.classList.add("btn-warning");
-        modeHour.classList.add("btn-outline");
-    }
-}
-updateModeUI();
-
-modeHour.onclick=()=>{
-    currentMode="hour";
-    localStorage.setItem("videoTradeMode","hour");
-    updateModeUI();
-};
-modeToday.onclick=()=>{
-    currentMode="today";
-    localStorage.setItem("videoTradeMode","today");
-    updateModeUI();
-};
-
-
-function getMidnight(){
-    const now=new Date();
-    return new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime();
-}
-function getNextMidnight(){
-    const now=new Date();
-    return new Date(now.getFullYear(),now.getMonth(),now.getDate()+1).getTime();
-}
-function getData(){
-    return JSON.parse(localStorage.getItem("videoTradePro"))||{};
-}
-function saveData(data){
-    localStorage.setItem("videoTradePro",JSON.stringify(data));
-}
-function checkReset(){
-    const todayMidnight=getMidnight();
-    let data=getData();
-    if(!data.lastReset||data.lastReset!==todayMidnight){
-        data={count:0,lastReset:todayMidnight};
-        saveData(data);
-    }
-}
-function increase(){
-    checkReset();
-    let data=getData();
-    data.count++;
-    saveData(data);
-    dailyCount.textContent=data.count;
-}
-function loadCount(){
-    checkReset();
-    dailyCount.textContent=getData().count||0;
-}
-loadCount();
-
-function updateCountdown(){
-    const diff=getNextMidnight()-Date.now();
-    const h=Math.floor(diff/1000/60/60);
-    const m=Math.floor(diff/1000/60)%60;
-    const s=Math.floor(diff/1000)%60;
-    countdown.textContent=`Reset in ${h}h ${m}m ${s}s`;
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-function search(query){
-    if(!query||redirecting)return;
-    redirecting=true;
-    redirectBtn.classList.remove("hidden");
-    increase();
-
-    const encoded=encodeURIComponent(query);
-    const url=`https://www.youtube.com/results?search_query=${encoded}&sp=${filters[currentMode]}`;
-
-    searchBox.value="";
-    setTimeout(()=>location.replace(url),500);
-}
-
-searchBox.addEventListener("input",()=>{
-    if(searchBox.value.trim().length>=1){
-        search(searchBox.value.trim());
-    }
-});
-
-pasteBtn.addEventListener("click",async()=>{
-    try{
-        const text=await navigator.clipboard.readText();
-        if(text){
-            searchBox.value=text.trim();
-            search(text.trim());
+        function updateModeSummary() {
+            const summary = document.getElementById('modeSummary');
+            const platformText = currentPlatform.charAt(0).toUpperCase() + currentPlatform.slice(1);
+            const modeText = currentMode === 'hour' ? 'Last Hour' : 'Today';
+            
+            summary.textContent = `${platformText} • ${modeText}`;
+            
+            
+            if (currentPlatform === 'android') {
+                summary.className = "text-sm font-medium text-green-400";
+            } else if (currentPlatform === 'ios') {
+                summary.className = "text-sm font-medium text-zinc-200";
+            } else {
+                summary.className = "text-sm font-medium text-purple-400";
+            }
         }
-    }catch{
-        toast.classList.remove("hidden");
-        setTimeout(()=>toast.classList.add("hidden"),3000);
-    }
-});
 
-document.addEventListener("visibilitychange",()=>{
-    if(!document.hidden){
-        redirecting=false;
-        redirectBtn.classList.add("hidden");
-        searchBox.value="";
-        loadCount();
-    }
-});
+        function setMode(mode) {
+            currentMode = mode;
+            localStorage.setItem('htMode', mode);
+            updateButtons();
+            updateModeSummary();
+        }
 
-})();
-</script>
+        function setPlatform(platform) {
+            currentPlatform = platform;
+            localStorage.setItem('htPlatform', platform);
+            updatePlatformButtons();
+            updateModeSummary();
+        }
 
-<script>
-    if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(console.error);
-  });
-}
-</script>
+        function updateButtons() {
+            const hourBtn = document.getElementById('btnHour');
+            const todayBtn = document.getElementById('btnToday');
+            
+            if (currentMode === 'hour') {
+                hourBtn.className = "py-3 px-4 rounded-xl bg-red-600 text-white font-medium text-sm transition-all active:scale-95";
+                todayBtn.className = "py-3 px-4 rounded-xl bg-zinc-800 text-zinc-400 font-medium text-sm hover:bg-zinc-700 transition-all active:scale-95";
+            } else {
+                todayBtn.className = "py-3 px-4 rounded-xl bg-red-600 text-white font-medium text-sm transition-all active:scale-95";
+                hourBtn.className = "py-3 px-4 rounded-xl bg-zinc-800 text-zinc-400 font-medium text-sm hover:bg-zinc-700 transition-all active:scale-95";
+            }
+        }
 
+        function updatePlatformButtons() {
+            const androidBtn = document.getElementById('btnAndroid');
+            const iosBtn = document.getElementById('btnIOS');
+            const pcBtn = document.getElementById('btnPC');
+            
+            androidBtn.className = "py-2 px-3 rounded-lg bg-zinc-800 text-zinc-400 font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1 hover:bg-zinc-700";
+            iosBtn.className = "py-2 px-3 rounded-lg bg-zinc-800 text-zinc-400 font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1 hover:bg-zinc-700";
+            pcBtn.className = "py-2 px-3 rounded-lg bg-zinc-800 text-zinc-400 font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1 hover:bg-zinc-700";
+            
+            if (currentPlatform === 'android') {
+                androidBtn.className = "py-2 px-3 rounded-lg bg-green-600 text-white font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1";
+            } else if (currentPlatform === 'ios') {
+                iosBtn.className = "py-2 px-3 rounded-lg bg-zinc-200 text-black font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1";
+            } else if (currentPlatform === 'pc') {
+                pcBtn.className = "py-2 px-3 rounded-lg bg-purple-600 text-white font-medium text-xs transition-all active:scale-95 flex items-center justify-center gap-1";
+            }
+        }
+
+        function openApp(query) {
+            if (redirecting) return;
+            redirecting = true;
+
+            let data = JSON.parse(localStorage.getItem('ht')) || {};
+            const today = new Date().toDateString();
+            if (data.date !== today) data = { date: today, count: 0 };
+            data.count++;
+            localStorage.setItem('ht', JSON.stringify(data));
+            document.getElementById('count').textContent = data.count;
+
+            const encoded = encodeURIComponent(query);
+            
+            let url;
+            if (currentPlatform === 'pc') {
+                url = `${SCHEMES.pc}/results?search_query=${encoded}&sp=${FILTERS[currentMode]}`;
+            } else {
+                url = `${SCHEMES[currentPlatform]}://results?search_query=${encoded}&sp=${FILTERS[currentMode]}`;
+            }
+            
+            window.location.href = url;
+        }
+
+        async function pasteIt() {
+            try {
+                const text = await navigator.clipboard.readText();
+                if (text) {
+                    document.getElementById('searchBox').value = text.trim();
+                    openApp(text.trim());
+                }
+            } catch {}
+        }
+
+        function loadCount() {
+            const data = JSON.parse(localStorage.getItem('ht')) || {};
+            const today = new Date().toDateString();
+            document.getElementById('count').textContent = (data.date === today) ? (data.count || 0) : 0;
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const tmrw = new Date(now);
+            tmrw.setDate(tmrw.getDate() + 1);
+            tmrw.setHours(0, 0, 0, 0);
+            
+            const diff = tmrw - now;
+            const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
+            const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+            
+            document.getElementById('timer').textContent = `${h}:${m}`;
+        }
+    </script>
 </body>
 </html>
