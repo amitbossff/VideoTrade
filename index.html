@@ -30,6 +30,10 @@
             0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
             50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
         }
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
         
       
         .particle {
@@ -183,6 +187,273 @@
         }
         .theme-toggle-new:active { transform: scale(0.92); }
         
+    
+        .top-left-buttons {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 200;
+        }
+        
+        .channel-btn {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: all 0.2s;
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        body.dark-mode .channel-btn {
+            background: rgba(15, 25, 45, 0.7);
+            border-color: rgba(255,255,255,0.1);
+            color: #e2e8f0;
+        }
+        
+        .channel-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+        
+        body.dark-mode .channel-btn:hover {
+            background: rgba(30, 41, 59, 0.9);
+        }
+        
+        .channel-btn:active { transform: scale(0.96); }
+        
+        .channel-btn i {
+            font-size: 16px;
+        }
+        
+        .channel-btn.payment-btn i {
+            color: #fbbf24;
+        }
+        
+        .channel-btn.task-btn i {
+            color: #34d399;
+        }
+        
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 420px;
+            max-height: 80vh;
+            overflow: hidden;
+            animation: modalSlideIn 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        
+        body.dark-mode .modal-content {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header.payment-header {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .modal-header.task-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 60vh;
+        }
+        
+        .channel-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .channel-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        body.dark-mode .channel-item {
+            background: #334155;
+        }
+        
+        .channel-item:hover {
+            border-color: #f97316;
+            transform: translateX(5px);
+            background: #fff7ed;
+        }
+        
+        body.dark-mode .channel-item:hover {
+            background: #475569;
+            border-color: #f97316;
+        }
+        
+        .channel-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0088cc, #00a8e6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .channel-item.payment-channel .channel-icon {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .channel-item.task-channel .channel-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .channel-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .channel-name {
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .channel-desc {
+            font-size: 12px;
+            color: #64748b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        body.dark-mode .channel-desc {
+            color: #94a3b8;
+        }
+        
+        .channel-arrow {
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+        
+        .channel-item:hover .channel-arrow {
+            color: #f97316;
+            transform: translateX(3px);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #94a3b8;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+        
+        .add-channel-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 16px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .add-channel-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249,115,22,0.4);
+        }
+        
         .hero-emoji {
             font-size: 2rem;
             filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2));
@@ -219,6 +490,20 @@
         
         @media (max-width: 480px) {
             .wider-card { max-width: 94%; }
+            .top-left-buttons {
+                top: 15px;
+                left: 15px;
+            }
+            .channel-btn {
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            .channel-btn span {
+                display: none;
+            }
+            .channel-btn i {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -228,6 +513,58 @@
     <div class="animated-bg"></div>
     
     <div id="particles"></div>
+    
+    
+    <div class="top-left-buttons">
+        <button class="channel-btn payment-btn" onclick="openModal('payment')">
+            <i class="bi bi-credit-card-fill"></i>
+            <span>Payment Channel</span>
+        </button>
+        <button class="channel-btn task-btn" onclick="openModal('task')">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Task Channel</span>
+        </button>
+    </div>
+    
+    
+    <div id="paymentModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'payment')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header payment-header">
+                <div class="modal-title">
+                    <i class="bi bi-credit-card-fill"></i>
+                    Payment Channels
+                </div>
+                <button class="modal-close" onclick="closeModal('payment')">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="paymentChannelList" class="channel-list">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div id="taskModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'task')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header task-header">
+                <div class="modal-title">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Task Channels
+                </div>
+                <button class="modal-close" onclick="closeModal('task')">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="taskChannelList" class="channel-list">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     
   
     <div class="theme-toggle-new" id="themeToggleBtn">
@@ -304,7 +641,7 @@
                     </div>
                 </div>
                 
-                <!-- Footer section removed completely -->
+            
             </div>
         </div>
     </div>
@@ -334,6 +671,125 @@
             
             let currentMode = localStorage.getItem("youtubeSearchMode") || "hour";
             let isRedirecting = false;
+            
+            
+            const channelData = {
+                payment: [
+                    {
+                        name: "Mahakal X Lifafa",
+                        description: "@Mahakal_X_Lifafa67",
+                        url: "https://t.me/Mahakal_X_Lifafa67",
+                        icon: "bi-telegram"
+                    },
+                    {
+                        name: "Earning X Lifafa",
+                        description: "@EarningXLifafa",
+                        url: "https://t.me/EarningXLifafa",
+                        icon: "bi-telegram"
+                    },
+                    {
+                        name: "RDX Lifafa",
+                        description: "@rdxlifafa",
+                        url: "https://t.me/rdxlifafa",
+                        icon: "bi-telegram"
+                    }
+                ],
+                task: [
+                    {
+                        name: "Munna Bhaiya Giveaways",
+                        description: "@Munna_Bhaiya_Giveaways",
+                        url: "https://t.me/Munna_Bhaiya_Giveaways",
+                        icon: "bi-telegram"
+                    },
+                    {
+                        name: "Jalebi Fafda Giveaways",
+                        description: "@Jalebi_Fafda_Giveaways",
+                        url: "https://t.me/Jalebi_Fafda_Giveaways",
+                        icon: "bi-telegram"
+                    },
+                    {
+                        name: "Video Trade",
+                        description: "@VideoTrade01",
+                        url: "https://t.me/VideoTrade01",
+                        icon: "bi-telegram"
+                    },
+                    {
+                        name: "Earning Giveaway",
+                        description: "@Earning_Giveaway1",
+                        url: "https://t.me/Earning_Giveaway1",
+                        icon: "bi-telegram"
+                    },
+                    {
+                        name: "Mahakal Giveaways",
+                        description: "@Mahakal_Giveaways67",
+                        url: "https://t.me/Mahakal_Giveaways67",
+                        icon: "bi-telegram"
+                    }
+                ]
+            };
+            
+            
+            window.openModal = function(type) {
+                const modal = document.getElementById(type + 'Modal');
+                const listContainer = document.getElementById(type + 'ChannelList');
+                
+            
+                listContainer.innerHTML = '';
+                
+                
+                const channels = channelData[type] || [];
+                
+                if (channels.length === 0) {
+                    listContainer.innerHTML = `
+                        <div class="empty-state">
+                            <i class="bi bi-inbox"></i>
+                            <p>No channels available</p>
+                        </div>
+                    `;
+                } else {
+                    channels.forEach((channel, index) => {
+                        const channelItem = document.createElement('a');
+                        channelItem.href = channel.url;
+                        channelItem.target = '_blank';
+                        channelItem.className = `channel-item ${type}-channel`;
+                        channelItem.style.animationDelay = `${index * 0.05}s`;
+                        channelItem.innerHTML = `
+                            <div class="channel-icon">
+                                <i class="bi ${channel.icon}"></i>
+                            </div>
+                            <div class="channel-info">
+                                <div class="channel-name">${channel.name}</div>
+                                <div class="channel-desc">${channel.description}</div>
+                            </div>
+                            <i class="bi bi-chevron-right channel-arrow"></i>
+                        `;
+                        listContainer.appendChild(channelItem);
+                    });
+                }
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+            
+            window.closeModal = function(type) {
+                const modal = document.getElementById(type + 'Modal');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            };
+            
+            window.closeModalOnOverlay = function(event, type) {
+                if (event.target === event.currentTarget) {
+                    closeModal(type);
+                }
+            };
+            
+            
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeModal('payment');
+                    closeModal('task');
+                }
+            });
             
           
             function getStartOfDayUTC() {
