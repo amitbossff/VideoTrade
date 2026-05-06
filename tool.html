@@ -1,0 +1,543 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NumberTool</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<style>
+
+/* ⭐ PURE AMOLED THEME ----------------------------------------- */
+:root {
+  --bg-color: #000000;          /* Pure Black */
+  --card-bg: #0d0d0d;           /* Deep Black */
+  --text-color: #e4e4e4;        /* Light Gray */
+  --primary-color: #6d28d9;     /* Deep Purple */
+  --secondary-color: #8b5cf6;   /* Light Purple */
+  --border-color: #1f1f1f;
+  --history-total-color: #a78bfa;
+}
+
+body {
+  background: var(--bg-color);
+  font-family: Poppins, sans-serif;
+  padding: 12px;
+  color: var(--text-color);
+}
+
+/* CARD ---------------------------------------------------------- */
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  padding: 18px;
+  margin-bottom: 18px;
+}
+
+/* BUTTON -------------------------------------------------------- */
+.btn {
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* TEXTAREA ------------------------------------------------------ */
+textarea {
+  width: 90%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: #000;               /* pure black */
+  color: white;
+  resize: none;
+  min-height: 130px;
+  font-size: 14px;
+}
+
+/* Placeholder Pure Gray Smaller */
+textarea::placeholder {
+  color: #7a7a7a;
+  font-size: 12px;
+}
+
+#freshPreview { border: 2px solid #22c55e; }
+#dupPreview   { border: 2px solid #dc2626; }
+#invPreview   { border: 2px solid #ea580c; }
+
+/* HEADER -------------------------------------------------------- */
+header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+header button {
+  padding: 8px 16px;
+  background: #1a1a1a;
+  border: 1px solid #2d2d2d;
+  border-radius: 10px;
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
+/* TABS ---------------------------------------------------------- */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #2a2a2a;
+  color: #d0d0d0;
+}
+.tab-btn.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* HISTORY ------------------------------------------------------- */
+.history-item {
+  background: #0d0d0d;
+  border: 1px solid #1f1f1f;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* COPY BTN ------------------------------------------------------ */
+.copy-btn {
+  background: #0d9488;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* TOAST --------------------------------------------------------- */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: white;
+  padding: 12px 22px;
+  border-radius: 12px;
+  display: none;
+}
+
+/* LOGIN PAGE ---------------------------------------------------- */
+#loginInput {
+  width: 90%;
+  padding: 12px;
+  border-radius: 12px;
+  background: #000;
+  border: 1px solid #2d2d2d;
+  color: white;
+  text-align: center;
+  font-size: 20px;
+}
+
+#loginInput::placeholder {
+  color: gray;
+  font-size: 12px; /* smaller */
+}
+
+/* POPUPS -------------------------------------------------------- */
+.popup-layer {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.7);
+}
+
+.popup-box {
+  width: 260px;                  /* smaller popup */
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  color: white;
+}
+
+/* DATE INPUT SMALL --------------------------------------------- */
+.popup-box input {
+  width: 100%;
+  padding: 8px;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+}
+
+/* COMPACT KEYPAD ----------------------------------------------- */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+.keypad-btn {
+  background: #1b1b1b;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  font-size: 18px;
+  font-weight: bold;
+}
+.keypad-btn.clear {
+  grid-column: span 3;
+  background: #7f1d1d;
+  color: #ffb3b3;
+}
+
+</style>
+</head>
+<body>
+
+<!-- LOGIN PAGE ---------------------------------------------------- -->
+<div id="loginPage" class="card">
+  <h2 style="text-align:center;">Login</h2>
+  <input id="loginInput" type="number" placeholder="Enter Number..." />
+  <div class="btn" onclick="loginUser()">Login</div>
+</div>
+
+<!-- MAIN APP ------------------------------------------------------ -->
+<div id="mainApp" style="display:none;">
+
+<header>
+  <button style="visibility:hidden;">Dark</button>
+
+  <button onclick="copyRadheRadhe()" 
+    style="background:linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+           padding:8px 14px; border:none; border-radius:10px; color:white;">
+    Radhe Radhe ❤️
+  </button>
+
+  <button onclick="logoutUser()">Logout</button>
+</header>
+
+<!-- INPUT BLOCK -->
+<div class="card">
+  <h3>Paste Numbers</h3>
+  <textarea id="numberInput" placeholder="Paste your number here..."></textarea>
+  <div class="btn" onclick="processNumbers()">Filter</div>
+</div>
+
+<!-- RESULT -->
+<div class="card" id="mainOutput" style="display:none;">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('fresh')">Fresh</button>
+    <button class="tab-btn" onclick="switchTab('dup')">Duplicate</button>
+    <button class="tab-btn" onclick="switchTab('inv')">Invalid</button>
+  </div>
+
+  <div id="fresh" class="tab-content active">
+    <b>Fresh Numbers:</b> <span id="cleanCount">0</span>
+    <textarea id="freshPreview" readonly></textarea>
+    <input id="cleanOutput" type="hidden">
+
+    <div class="btn" onclick="animatedCopy(this, document.getElementById('cleanOutput').value.split('\n').join(','))">
+      📋 Copy
+    </div>
+
+    <div class="btn" onclick="showSavePopup()">💾 Save</div>
+  </div>
+
+  <div id="dup" class="tab-content" style="display:none;">
+    <b>Duplicates:</b> <span id="dupCount">0</span>
+    <textarea id="dupPreview" readonly></textarea>
+  </div>
+
+  <div id="inv" class="tab-content" style="display:none;">
+    <b>Invalid:</b> <span id="invalidCount">0</span>
+    <textarea id="invPreview" readonly></textarea>
+  </div>
+</div>
+
+<!-- HISTORY -------------------------------------------------------- -->
+<div class="card">
+  <h3>📂 History</h3>
+  <div id="historyList"><i>No history</i></div>
+  <div class="btn" style="background:#dc2626;" onclick="showClearPopup()">Clear All</div>
+</div>
+
+
+<!-- SAVE POPUP ----------------------------------------------------- -->
+<div class="popup-layer" id="savePopup" onclick="popupClose(event,'savePopup')">
+  <div class="popup-box">
+    <h3 style="font-size:16px;">Enter Date / Bot</h3>
+    <input id="dateInput" readonly />
+
+    <div class="keypad">
+      <button class="keypad-btn" onclick="addDigit('1')">1</button>
+      <button class="keypad-btn" onclick="addDigit('2')">2</button>
+      <button class="keypad-btn" onclick="addDigit('3')">3</button>
+      <button class="keypad-btn" onclick="addDigit('4')">4</button>
+      <button class="keypad-btn" onclick="addDigit('5')">5</button>
+      <button class="keypad-btn" onclick="addDigit('6')">6</button>
+      <button class="keypad-btn" onclick="addDigit('7')">7</button>
+      <button class="keypad-btn" onclick="addDigit('8')">8</button>
+      <button class="keypad-btn" onclick="addDigit('9')">9</button>
+      <button class="keypad-btn" onclick="addDigit('0')">0</button>
+
+      <button class="keypad-btn clear" onclick="clearDate()">Clear</button>
+    </div>
+
+    <div class="btn" onclick="finalSave()">Save</div>
+  </div>
+</div>
+
+<!-- CLEAR POPUP ---------------------------------------------------- -->
+<div class="popup-layer" id="clearPopup" onclick="popupClose(event,'clearPopup')">
+  <div class="popup-box">
+    <p style="font-size:18px;">❗ Clear All History?</p>
+    <div style="display:flex; gap:10px; margin-top:10px;">
+      <div class="btn" style="background:#b91c1c;" onclick="confirmClearAll()">Yes</div>
+      <div class="btn" style="background:#6b7280;" onclick="hideClearPopup()">No</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* FIREBASE CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyAmqp2K0i72H6bxO5jNOEwYIb7Q57p0614",
+  authDomain: "numbertool-706b8.firebaseapp.com",
+  projectId: "numbertool-706b8",
+  storageBucket: "numbertool-706b8.firebasestorage.app",
+  messagingSenderId: "81428313714",
+  appId: "1:81428313714:web:60bc1a77093e4bac0734eb"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+let currentUser = null;
+let historyData = [];
+
+/* LOGIN */
+function loginUser() {
+  let phone = document.getElementById("loginInput").value.trim();
+  if (phone.length < 10) return showToast("Enter valid number");
+
+  currentUser = phone;
+  localStorage.setItem("loggedUser", phone);
+  loadHistoryFromFirestore(phone);
+
+  document.getElementById("loginPage").style.display = "none";
+  document.getElementById("mainApp").style.display = "block";
+}
+
+window.onload = () => {
+  let saved = localStorage.getItem("loggedUser");
+  if (saved) {
+    currentUser = saved;
+    loadHistoryFromFirestore(saved);
+
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+  }
+};
+
+/* LOGOUT */
+function logoutUser() {
+  localStorage.removeItem("loggedUser");
+  currentUser = null;
+  document.getElementById("mainApp").style.display = "none";
+  document.getElementById("loginPage").style.display = "block";
+}
+
+/* COPY */
+function copyRadheRadhe() {
+  navigator.clipboard.writeText("Radhe Radhe ❤️");
+  showToast("Copied!");
+}
+
+/* LOAD HISTORY */
+async function loadHistoryFromFirestore(phone) {
+  let doc = await db.collection("users").doc(phone).get();
+  if (!doc.exists) {
+    await db.collection("users").doc(phone).set({ history: [] });
+    historyData = [];
+  } else {
+    historyData = doc.data().history || [];
+  }
+  renderHistory();
+}
+
+/* SAVE HISTORY */
+function updateFirestore() {
+  db.collection("users").doc(currentUser).update({ history: historyData });
+}
+
+/* FILTER */
+function processNumbers() {
+  const raw = document.getElementById("numberInput").value.split(/[\s,]+/);
+  const seen = new Set(), dup = new Set(), invalid = [], clean = [];
+
+  raw.forEach(n => {
+    n = n.replace(/\D/g, "");
+    if (n.length === 10) {
+      if (seen.has(n)) dup.add(n);
+      else { seen.add(n); clean.push(n); }
+    } else if (n.length > 0) invalid.push(n);
+  });
+
+  document.getElementById("mainOutput").style.display = "block";
+
+  document.getElementById("freshPreview").value = clean.join("\n");
+  document.getElementById("cleanOutput").value = clean.join("\n");
+  document.getElementById("cleanCount").textContent = clean.length;
+
+  document.getElementById("dupPreview").value = [...dup].join("\n");
+  document.getElementById("dupCount").textContent = dup.size;
+
+  document.getElementById("invPreview").value = invalid.join("\n");
+  document.getElementById("invalidCount").textContent = invalid.length;
+}
+
+/* POPUPS */
+function showSavePopup() {
+  document.getElementById("savePopup").style.display = "flex";
+}
+function addDigit(n) {
+  document.getElementById("dateInput").value += n;
+}
+function clearDate() {
+  document.getElementById("dateInput").value = "";
+}
+function popupClose(e, id) {
+  if (e.target.id === id) document.getElementById(id).style.display = "none";
+}
+
+/* FINAL SAVE */
+function finalSave() {
+  let nums = document.getElementById("cleanOutput").value;
+  if (!nums) return showToast("Filter first");
+
+  let date = document.getElementById("dateInput").value.trim();
+  if (!date) {
+    let d = new Date();
+    date = d.getDate() + " " + d.toLocaleString("default", { month: "short" });
+  }
+
+  const lines = document.getElementById("numberInput").value.split("\n");
+  const nameLine = lines.find(l => l.trim().endsWith(":"));
+  let name = nameLine ? nameLine.replace(":", "").trim() : "Unnamed";
+
+  const entry = {
+    name,
+    date,
+    numbers: nums,
+    total: nums.split("\n").length
+  };
+
+  historyData.unshift(entry);
+  updateFirestore();
+  renderHistory();
+
+  document.getElementById("savePopup").style.display = "none";
+  document.getElementById("dateInput").value = "";
+  showToast("Saved!");
+}
+
+/* CLEAR ALL */
+function showClearPopup() {
+  document.getElementById("clearPopup").style.display = "flex";
+}
+function hideClearPopup() {
+  document.getElementById("clearPopup").style.display = "none";
+}
+function confirmClearAll() {
+  historyData = [];
+  updateFirestore();
+  renderHistory();
+  hideClearPopup();
+}
+
+/* RENDER HISTORY */
+function renderHistory() {
+  let box = document.getElementById("historyList");
+  box.innerHTML = "";
+
+  if (historyData.length === 0) {
+    box.innerHTML = "<i>No history</i>";
+    return;
+  }
+
+  historyData.forEach(entry => {
+    let comma = entry.numbers.split("\n").join(",");
+
+    let div = document.createElement("div");
+    div.className = "history-item";
+
+    div.innerHTML = `
+      <div>
+        <span style="color:var(--history-total-color); font-weight:bold;">${entry.total}</span>
+        - ${entry.name} (${entry.date})
+      </div>
+      <button class="copy-btn" onclick="animatedCopy(this,'${comma}')">Copy</button>
+    `;
+
+    box.appendChild(div);
+  });
+}
+
+/* COPY ANIMATION */
+function animatedCopy(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    let old = btn.textContent;
+    btn.textContent = "Copied!";
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.textContent = old;
+      btn.disabled = false;
+    }, 1200);
+  });
+}
+
+/* TABS */
+function switchTab(id) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.querySelector(`.tab-btn[onclick*="${id}"]`).classList.add("active");
+
+  document.querySelectorAll(".tab-content").forEach(c => c.style.display = "none");
+  document.getElementById(id).style.display = "block";
+}
+
+/* TOAST */
+function showToast(msg) {
+  let t = document.getElementById("toast");
+  t.textContent = msg;
+  t.style.display = "block";
+  setTimeout(() => t.style.display = "none", 1500);
+}
+</script>
+
+</body>
+  </html>
