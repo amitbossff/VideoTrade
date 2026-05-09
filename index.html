@@ -265,10 +265,10 @@
         
         .modal-content {
             background: white;
-            border-radius: 24px;
+            border-radius: 32px;
             width: 100%;
-            max-width: 420px;
-            max-height: 80vh;
+            max-width: 460px;
+            max-height: 85vh;
             overflow: hidden;
             animation: modalSlideIn 0.3s ease;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
@@ -282,7 +282,7 @@
         .modal-header {
             background: linear-gradient(135deg, #f97316, #ea580c);
             color: white;
-            padding: 20px;
+            padding: 20px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -294,6 +294,10 @@
         
         .modal-header.task-header {
             background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .modal-header.instructions-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
         }
         
         .modal-title {
@@ -323,7 +327,7 @@
         }
         
         .modal-body {
-            padding: 20px;
+            padding: 20px 24px;
             overflow-y: auto;
             max-height: 60vh;
         }
@@ -426,41 +430,143 @@
             color: #94a3b8;
         }
         
-        .empty-state i {
-            font-size: 48px;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-        
-        .add-channel-btn {
+        .instruction-highlight-btn {
             width: 100%;
-            padding: 14px;
-            margin-top: 16px;
-            background: linear-gradient(135deg, #f97316, #ea580c);
-            color: white;
+            background: linear-gradient(125deg, #ffecd2 0%, #fcb69f 100%);
             border: none;
-            border-radius: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
+            border-radius: 60px;
+            padding: 12px 16px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #b45309;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 14px rgba(249,115,22,0.3);
+            margin-bottom: 16px;
+            backdrop-filter: blur(2px);
+            animation: gentlePulse 1.8s infinite;
         }
-        
-        .add-channel-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px rgba(249,115,22,0.4);
+        body.dark-mode .instruction-highlight-btn {
+            background: linear-gradient(125deg, #2c2b2a, #4a2a1e);
+            color: #ffc107;
+            box-shadow: 0 0 0 1px rgba(255,193,7,0.3);
         }
-        
-        .hero-emoji {
-            font-size: 2rem;
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2));
-            animation: floatSubtle 3s infinite;
+        .instruction-highlight-btn i {
+            font-size: 1.3rem;
+            color: #f97316;
+        }
+        body.dark-mode .instruction-highlight-btn i {
+            color: #ffbb33;
+        }
+        .instruction-highlight-btn:active {
+            transform: scale(0.97);
         }
         
       
+        .instructions-list-modern {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .instructions-list-modern li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        body.dark-mode .instructions-list-modern li {
+            border-bottom-color: #334155;
+        }
+        .instructions-list-modern li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(249,115,22,0.3);
+        }
+        body.dark-mode .step-number {
+            background: linear-gradient(135deg, #f97316, #dc2626);
+        }
+        .step-content {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.45;
+            font-weight: 500;
+            color: #1e293b;
+        }
+        body.dark-mode .step-content {
+            color: #e2e8f0;
+        }
+        .step-highlight {
+            font-weight: 800;
+            color: #f97316;
+            background: #fff1e6;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.85rem;
+        }
+        body.dark-mode .step-highlight {
+            background: #2d1f1a;
+            color: #ffaa66;
+        }
+        .instruction-badge {
+            background: #fef3c7;
+            color: #b45309;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 30px;
+            padding: 4px 12px;
+            display: inline-block;
+            margin-top: 6px;
+        }
+        body.dark-mode .instruction-badge {
+            background: #33281a;
+            color: #ffcd7e;
+        }
+        .footer-note {
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 12px 18px;
+            margin-top: 16px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #475569;
+        }
+        body.dark-mode .footer-note {
+            background: #0f172a;
+            color: #94a3b8;
+        }
+        .wider-card {
+            max-width: 500px;
+            width: 100%;
+        }
+        @media (max-width: 480px) {
+            .wider-card { max-width: 94%; }
+            .top-left-buttons { top: 15px; left: 15px; }
+            .channel-btn { padding: 8px 14px; font-size: 12px; }
+            .channel-btn span { display: none; }
+            .channel-btn i { font-size: 18px; }
+            .step-number { width: 32px; height: 32px; font-size: 0.85rem; }
+            .step-content { font-size: 0.85rem; }
+        }
         .confetti-piece-new {
             position: fixed;
             width: 10px;
@@ -475,45 +581,11 @@
             0% { transform: translateY(-20vh) rotate(0deg); opacity: 1; }
             100% { transform: translateY(100vh) rotate(500deg); opacity: 0; }
         }
-        
-        .btn-radhe {
-            background: linear-gradient(95deg, #f97316, #dc2626);
-            transition: 0.2s;
-            box-shadow: 0 10px 18px -8px rgba(249,115,22,0.4);
-        }
-        .btn-radhe:active { transform: scale(0.96); }
-        
-        .wider-card {
-            max-width: 500px;
-            width: 100%;
-        }
-        
-        @media (max-width: 480px) {
-            .wider-card { max-width: 94%; }
-            .top-left-buttons {
-                top: 15px;
-                left: 15px;
-            }
-            .channel-btn {
-                padding: 8px 14px;
-                font-size: 12px;
-            }
-            .channel-btn span {
-                display: none;
-            }
-            .channel-btn i {
-                font-size: 18px;
-            }
-        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4 antialiased relative font-sans">
-    
-  
     <div class="animated-bg"></div>
-    
     <div id="particles"></div>
-    
     
     <div class="top-left-buttons">
         <button class="channel-btn payment-btn" onclick="openModal('payment')">
@@ -526,68 +598,101 @@
         </button>
     </div>
     
-    
     <div id="paymentModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'payment')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-header payment-header">
-                <div class="modal-title">
-                    <i class="bi bi-credit-card-fill"></i>
-                    Payment Channels
-                </div>
-                <button class="modal-close" onclick="closeModal('payment')">
-                    <i class="bi bi-x-lg"></i>
-                </button>
+                <div class="modal-title"><i class="bi bi-credit-card-fill"></i> Payment Channels</div>
+                <button class="modal-close" onclick="closeModal('payment')"><i class="bi bi-x-lg"></i></button>
             </div>
-            <div class="modal-body">
-                <div id="paymentChannelList" class="channel-list">
-                    
-                </div>
-            </div>
+            <div class="modal-body"><div id="paymentChannelList" class="channel-list"></div></div>
         </div>
     </div>
-    
     
     <div id="taskModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'task')">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="modal-header task-header">
-                <div class="modal-title">
-                    <i class="bi bi-check-circle-fill"></i>
-                    Task Channels
-                </div>
-                <button class="modal-close" onclick="closeModal('task')">
-                    <i class="bi bi-x-lg"></i>
-                </button>
+                <div class="modal-title"><i class="bi bi-check-circle-fill"></i> Task Channels</div>
+                <button class="modal-close" onclick="closeModal('task')"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="modal-body"><div id="taskChannelList" class="channel-list"></div></div>
+        </div>
+    </div>
+    
+    <div id="instructionsModal" class="modal-overlay" onclick="closeModalOnOverlay(event, 'instructions')">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header instructions-header">
+                <div class="modal-title"><i class="bi bi-list-check"></i> Task Guidelines</div>
+                <button class="modal-close" onclick="closeModal('instructions')"><i class="bi bi-x-lg"></i></button>
             </div>
             <div class="modal-body">
-                <div id="taskChannelList" class="channel-list">
-                    
+                <ul class="instructions-list-modern">
+                    <li>
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>▶️ Recording Start</strong><br>
+                            Video recording <span class="step-highlight">creator ke main Telegram channel</span> se hi start karna hai.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>🔍 Exact Search Query</strong><br>
+                            Jo search key diya gaya hai, <span class="step-highlight">wahi search karna hai</span> — exactly same keywords.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>👍 Like with Delay</strong><br>
+                            Video ko like karna hai, lekin <span class="step-highlight">turant nahi</span>, <strong>10-30 seconds baad</strong> karna hai.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <strong>💬 Comments (Max 2)</strong><br>
+                            Genuine comments — <span class="step-highlight">maximum do (2) comment</span> karne hain.
+                        </div>
+                    </li>
+                    <li>
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <strong>🎥 Full Watch + Submit</strong><br>
+                            Poori video watch karein aur <span class="step-highlight">complete recording bot pe apne number ke saath bhejna hai</span>.
+                        </div>
+                    </li>
+                </ul>
+                <div class="footer-note">
+                    <i class="bi bi-info-circle-fill text-orange-500"></i> Dhyaan rakhe: Saare steps ka puri tarah se follow karna hai. Sahi information aur recording ke bina aapka verification nahi hoga.
                 </div>
             </div>
         </div>
     </div>
     
-  
     <div class="theme-toggle-new" id="themeToggleBtn">
         <i id="themeIconNew" class="bi bi-moon-fill text-white text-xl"></i>
     </div>
     
     <div class="wider-card mx-auto relative z-10 animate-[fadeSlideUp_0.5s_ease-out]">
         <div class="glass-card rounded-3xl shadow-2xl overflow-hidden transition-all duration-300">
+            <div class="px-5 pt-5">
+                <button id="instructionsMainBtn" class="instruction-highlight-btn">
+                    <i class="bi bi-megaphone-fill"></i>
+                    📋 VIDEO TASK GUIDELINES ( Must Read )
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                </button>
+            </div>
             
-          
-            <div class="relative px-5 pt-5 pb-3 text-center bg-gradient-to-r from-orange-600 to-rose-700 text-white">
+            <div class="relative px-5 pt-2 pb-3 text-center bg-gradient-to-r from-orange-600 to-rose-700 text-white">
                 <div class="absolute top-0 left-0 w-40 h-40 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
                 <div class="absolute bottom-0 right-0 w-32 h-32 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3"></div>
                 <div class="relative flex flex-col items-center gap-1">
-                    
                     <h2 class="text-2xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 to-pink-100">Radhe Radhe</h2>
                     <p class="text-[11px] font-medium text-orange-100">AmitTG</p>
                 </div>
             </div>
             
             <div class="p-5 md:p-6">
-                
-            
                 <div class="mb-5 flex flex-col gap-2">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300">
@@ -600,7 +705,6 @@
                     </div>
                 </div>
                 
-              
                 <div class="mb-6">
                     <div class="flex items-center justify-between mb-2">
                         <label class="text-xs font-semibold text-gray-600 dark:text-gray-300 flex items-center gap-1"><i class="bi bi-search-heart text-rose-500"></i> Search YouTube</label>
@@ -608,7 +712,6 @@
                             <i class="bi bi-clipboard-plus text-xs"></i> Paste
                         </button>
                     </div>
-                    
                     <div class="relative group">
                         <i class="bi bi-youtube absolute left-4 top-1/2 -translate-y-1/2 text-red-500 text-lg z-10"></i>
                         <input type="text" id="searchInputField" placeholder="Search anything... (min 3 letters)" 
@@ -617,42 +720,29 @@
                             <i class="bi bi-arrow-return-left"></i>
                         </div>
                     </div>
-                    
                     <div id="redirectHint" class="hidden mt-3 text-center text-[11px] font-medium bg-orange-50 dark:bg-orange-950/40 py-2 rounded-full text-orange-700 dark:text-orange-300 animate-pulse">
                         <i class="bi bi-box-arrow-up-right mr-1"></i> Redirecting to YouTube...
                     </div>
                 </div>
                 
-              
                 <div class="grid grid-cols-2 gap-3 mt-2">
                     <div class="stat-badge flex items-center justify-between px-4 py-2.5 rounded-2xl">
-                        <div class="flex items-center gap-2">
-                            <i class="bi bi-graph-up text-amber-600 dark:text-amber-400 text-base"></i>
-                            <span class="text-xs font-medium text-gray-600 dark:text-gray-300">Today's </span>
-                        </div>
+                        <div class="flex items-center gap-2"><i class="bi bi-graph-up text-amber-600 dark:text-amber-400 text-base"></i><span class="text-xs font-medium text-gray-600 dark:text-gray-300">Today's </span></div>
                         <span id="dailyCounter" class="text-2xl font-black text-orange-600 dark:text-orange-400">0</span>
                     </div>
                     <div class="stat-badge flex items-center justify-between px-4 py-2.5 rounded-2xl">
-                        <div class="flex items-center gap-2">
-                            <i class="bi bi-lightning-charge text-amber-600 dark:text-amber-400 text-base"></i>
-                            <span class="text-xs font-medium text-gray-600 dark:text-gray-300">Current Mode</span>
-                        </div>
+                        <div class="flex items-center gap-2"><i class="bi bi-lightning-charge text-amber-600 dark:text-amber-400 text-base"></i><span class="text-xs font-medium text-gray-600 dark:text-gray-300">Current Mode</span></div>
                         <span id="modeIndicator" class="text-xs font-bold bg-orange-100 dark:bg-orange-900/50 px-3 py-1 rounded-full">Hour</span>
                     </div>
                 </div>
-                
-            
             </div>
         </div>
     </div>
     
-    <div id="globalToast" class="toast-custom">
-        <i class="bi bi-clipboard-x mr-2"></i> <span id="toastMsg">Clipboard is empty</span>
-    </div>
+    <div id="globalToast" class="toast-custom"><i class="bi bi-clipboard-x mr-2"></i> <span id="toastMsg">Clipboard is empty</span></div>
 
     <script>
         (function() {
-          
             const searchInput = document.getElementById("searchInputField");
             const pasteButton = document.getElementById("pasteBtnNew");
             const redirectHintDiv = document.getElementById("redirectHint");
@@ -662,382 +752,83 @@
             const modeIndicatorSpan = document.getElementById("modeIndicator");
             const themeBtn = document.getElementById("themeToggleBtn");
             const themeIconSpan = document.getElementById("themeIconNew");
+            const instructionsBtn = document.getElementById("instructionsMainBtn");
             
-          
-            const filters = {
-                hour: "EgIIAQ%3D%3D",
-                today: "EgIIAg%3D%3D"
-            };
-            
+            const filters = { hour: "EgIIAQ%3D%3D", today: "EgIIAg%3D%3D" };
             let currentMode = localStorage.getItem("youtubeSearchMode") || "hour";
             let isRedirecting = false;
             
-            
             const channelData = {
                 payment: [
-                    {
-                        name: "Mahakal X Lifafa",
-                        description: "@Mahakal_X_Lifafa67",
-                        url: "https://t.me/Mahakal_X_Lifafa67",
-                        icon: "bi-telegram"
-                    },
-                    {
-                        name: "Earning X Lifafa",
-                        description: "@EarningXLifafa",
-                        url: "https://t.me/EarningXLifafa",
-                        icon: "bi-telegram"
-                    }
-                    
+                    { name: "Mahakal X Lifafa", description: "@Mahakal_X_Lifafa67", url: "https://t.me/Mahakal_X_Lifafa67", icon: "bi-telegram" },
+                    { name: "Earning X Lifafa", description: "@EarningXLifafa", url: "https://t.me/EarningXLifafa", icon: "bi-telegram" }
                 ],
                 task: [
-                    {
-                        name: "Munna Bhaiya Giveaways",
-                        description: "@Munna_Bhaiya_Giveaways",
-                        url: "https://t.me/Munna_Bhaiya_Giveaways",
-                        icon: "bi-telegram"
-                    },
-                    {
-                        name: "Jalebi Fafda Giveaways",
-                        description: "@Jalebi_Fafda_Giveaways",
-                        url: "https://t.me/Jalebi_Fafda_Giveaways",
-                        icon: "bi-telegram"
-                    },
-                    {
-                        name: "Video Trade",
-                        description: "@VideoTrade01",
-                        url: "https://t.me/VideoTrade01",
-                        icon: "bi-telegram"
-                    },
-                    {
-                        name: "Earning Giveaway",
-                        description: "@Earning_Giveaway1",
-                        url: "https://t.me/Earning_Giveaway1",
-                        icon: "bi-telegram"
-                    },
-                    {
-                        name: "Mahakal Giveaways",
-                        description: "@Mahakal_Giveaways67",
-                        url: "https://t.me/Mahakal_Giveaways67",
-                        icon: "bi-telegram"
-                    },
-                    {
-                        name: "Make Money",
-                        description: "@MAKINGMONEYP",
-                        url: "https://t.me/MAKINGMONEYP",
-                        icon: "bi-telegram"
-                    }
+                    { name: "Munna Bhaiya Giveaways", description: "@Munna_Bhaiya_Giveaways", url: "https://t.me/Munna_Bhaiya_Giveaways", icon: "bi-telegram" },
+                    { name: "Jalebi Fafda Giveaways", description: "@Jalebi_Fafda_Giveaways", url: "https://t.me/Jalebi_Fafda_Giveaways", icon: "bi-telegram" },
+                    { name: "Video Trade", description: "@VideoTrade01", url: "https://t.me/VideoTrade01", icon: "bi-telegram" },
+                    { name: "Earning Giveaway", description: "@Earning_Giveaway1", url: "https://t.me/Earning_Giveaway1", icon: "bi-telegram" },
+                    { name: "Mahakal Giveaways", description: "@Mahakal_Giveaways67", url: "https://t.me/Mahakal_Giveaways67", icon: "bi-telegram" },
+                    { name: "Make Money", description: "@MAKINGMONEYP", url: "https://t.me/MAKINGMONEYP", icon: "bi-telegram" }
                 ]
             };
             
-            
             window.openModal = function(type) {
+                if(type === 'instructions') {
+                    document.getElementById('instructionsModal').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    return;
+                }
                 const modal = document.getElementById(type + 'Modal');
                 const listContainer = document.getElementById(type + 'ChannelList');
-                
-            
                 listContainer.innerHTML = '';
-                
-                
                 const channels = channelData[type] || [];
-                
-                if (channels.length === 0) {
-                    listContainer.innerHTML = `
-                        <div class="empty-state">
-                            <i class="bi bi-inbox"></i>
-                            <p>No channels available</p>
-                        </div>
-                    `;
-                } else {
-                    channels.forEach((channel, index) => {
-                        const channelItem = document.createElement('a');
-                        channelItem.href = channel.url;
-                        channelItem.target = '_blank';
-                        channelItem.className = `channel-item ${type}-channel`;
-                        channelItem.style.animationDelay = `${index * 0.05}s`;
-                        channelItem.innerHTML = `
-                            <div class="channel-icon">
-                                <i class="bi ${channel.icon}"></i>
-                            </div>
-                            <div class="channel-info">
-                                <div class="channel-name">${channel.name}</div>
-                                <div class="channel-desc">${channel.description}</div>
-                            </div>
-                            <i class="bi bi-chevron-right channel-arrow"></i>
-                        `;
-                        listContainer.appendChild(channelItem);
-                    });
-                }
-                
+                if (channels.length === 0) listContainer.innerHTML = `<div class="empty-state"><i class="bi bi-inbox"></i><p>No channels</p></div>`;
+                else channels.forEach((ch, idx) => {
+                    const a = document.createElement('a');
+                    a.href = ch.url; a.target = '_blank'; a.className = `channel-item ${type}-channel`;
+                    a.style.animationDelay = `${idx * 0.05}s`;
+                    a.innerHTML = `<div class="channel-icon"><i class="bi ${ch.icon}"></i></div><div class="channel-info"><div class="channel-name">${ch.name}</div><div class="channel-desc">${ch.description}</div></div><i class="bi bi-chevron-right channel-arrow"></i>`;
+                    listContainer.appendChild(a);
+                });
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             };
             
             window.closeModal = function(type) {
-                const modal = document.getElementById(type + 'Modal');
-                modal.classList.remove('active');
+                const modalId = type === 'instructions' ? 'instructionsModal' : type + 'Modal';
+                const modal = document.getElementById(modalId);
+                if(modal) modal.classList.remove('active');
                 document.body.style.overflow = '';
             };
+            window.closeModalOnOverlay = function(event, type) { if (event.target === event.currentTarget) closeModal(type); };
+            if(instructionsBtn) instructionsBtn.addEventListener("click", () => openModal('instructions'));
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal('payment'); closeModal('task'); closeModal('instructions'); } });
             
-            window.closeModalOnOverlay = function(event, type) {
-                if (event.target === event.currentTarget) {
-                    closeModal(type);
-                }
-            };
-            
-            
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeModal('payment');
-                    closeModal('task');
-                }
-            });
-            
-          
-            function getStartOfDayUTC() {
-                const now = new Date();
-                return new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-            }
-            
-            function getStorageData() {
-                try {
-                    return JSON.parse(localStorage.getItem("AmitTG")) || {};
-                } catch(e) { return {}; }
-            }
-            
-            function saveStorageData(data) {
-                localStorage.setItem("AmitTG", JSON.stringify(data));
-            }
-            
-            function resetIfNeeded() {
-                const todayStamp = getStartOfDayUTC();
-                let stats = getStorageData();
-                if (!stats.lastReset || stats.lastReset !== todayStamp) {
-                    stats = { count: 0, lastReset: todayStamp };
-                    saveStorageData(stats);
-                }
-                return stats;
-            }
-            
-            function increaseDailyCount() {
-                resetIfNeeded();
-                let stats = getStorageData();
-                stats.count = (stats.count || 0) + 1;
-                saveStorageData(stats);
-                updateDailyUI();
-            }
-            
-            function updateDailyUI() {
-                const stats = resetIfNeeded();
-                dailySpan.innerText = stats.count || 0;
-            }
-            
-          
+            function getStartOfDayUTC() { const now = new Date(); return new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime(); }
+            function getStorageData() { try { return JSON.parse(localStorage.getItem("AmitTG")) || {}; } catch(e) { return {}; } }
+            function saveStorageData(data) { localStorage.setItem("AmitTG", JSON.stringify(data)); }
+            function resetIfNeeded() { let stats = getStorageData(); const todayStamp = getStartOfDayUTC(); if (!stats.lastReset || stats.lastReset !== todayStamp) { stats = { count: 0, lastReset: todayStamp }; saveStorageData(stats); } return stats; }
+            function increaseDailyCount() { let stats = resetIfNeeded(); stats.count = (stats.count || 0) + 1; saveStorageData(stats); updateDailyUI(); }
+            function updateDailyUI() { const stats = resetIfNeeded(); dailySpan.innerText = stats.count || 0; }
             function applyModeUI() {
-                if (currentMode === "hour") {
-                    modeHourBtn.classList.add("mode-btn-active");
-                    modeHourBtn.classList.remove("mode-btn-inactive");
-                    modeTodayBtn.classList.add("mode-btn-inactive");
-                    modeTodayBtn.classList.remove("mode-btn-active");
-                    modeIndicatorSpan.innerText = "Last Hour";
-                    modeIndicatorSpan.classList.remove("bg-blue-100", "dark:bg-blue-900/50");
-                    modeIndicatorSpan.classList.add("bg-orange-100", "dark:bg-orange-900/50");
-                } else {
-                    modeTodayBtn.classList.add("mode-btn-active");
-                    modeTodayBtn.classList.remove("mode-btn-inactive");
-                    modeHourBtn.classList.add("mode-btn-inactive");
-                    modeHourBtn.classList.remove("mode-btn-active");
-                    modeIndicatorSpan.innerText = "Today";
-                    modeIndicatorSpan.classList.add("bg-amber-100", "dark:bg-amber-900/50");
-                }
+                if (currentMode === "hour") { modeHourBtn.classList.add("mode-btn-active"); modeHourBtn.classList.remove("mode-btn-inactive"); modeTodayBtn.classList.add("mode-btn-inactive"); modeTodayBtn.classList.remove("mode-btn-active"); modeIndicatorSpan.innerText = "Last Hour"; }
+                else { modeTodayBtn.classList.add("mode-btn-active"); modeTodayBtn.classList.remove("mode-btn-inactive"); modeHourBtn.classList.add("mode-btn-inactive"); modeHourBtn.classList.remove("mode-btn-active"); modeIndicatorSpan.innerText = "Today"; }
                 localStorage.setItem("youtubeSearchMode", currentMode);
             }
-            
-            modeHourBtn.addEventListener("click", () => {
-                if (currentMode === "hour") return;
-                currentMode = "hour";
-                applyModeUI();
-                showToast("Switched to Last Hour", "bi-hourglass-split");
-            });
-            
-            modeTodayBtn.addEventListener("click", () => {
-                if (currentMode === "today") return;
-                currentMode = "today";
-                applyModeUI();
-                showToast("Switched to Today", "bi-calendar-check");
-            });
-            
-          
-            function triggerConfettiBurst() {
-                for (let i = 0; i < 36; i++) {
-                    const conf = document.createElement("div");
-                    conf.className = "confetti-piece-new";
-                    const colors = ["#f97316", "#ea580c", "#f59e0b", "#ef4444", "#ec4899", "#8b5cf6"];
-                    conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    conf.style.left = Math.random() * window.innerWidth + "px";
-                    conf.style.width = Math.random() * 9 + 6 + "px";
-                    conf.style.height = Math.random() * 12 + 8 + "px";
-                    conf.style.borderRadius = Math.random() > 0.5 ? "2px" : "50%";
-                    conf.style.animationDuration = Math.random() * 1.2 + 0.8 + "s";
-                    conf.style.animationDelay = Math.random() * 0.2 + "s";
-                    document.body.appendChild(conf);
-                    setTimeout(() => conf.remove(), 2000);
-                }
-            }
-            
-            function showToast(message, icon = "bi-info-circle") {
-                const toastEl = document.getElementById("globalToast");
-                const msgSpan = document.getElementById("toastMsg");
-                if (!toastEl) return;
-                msgSpan.innerHTML = `<i class="${icon} mr-1"></i> ${message}`;
-                toastEl.classList.add("show");
-                setTimeout(() => {
-                    toastEl.classList.remove("show");
-                }, 2300);
-            }
-            
-            function performSearch(query) {
-                if (!query || query.trim().length < 3) {
-                    showToast("🔍 Type at least 3 characters!", "bi-emoji-frown");
-                    return false;
-                }
-                if (isRedirecting) return false;
-                
-                isRedirecting = true;
-                redirectHintDiv.classList.remove("hidden");
-                increaseDailyCount();
-                triggerConfettiBurst();
-                
-                const trimmedQuery = query.trim();
-                const encodedQuery = encodeURIComponent(trimmedQuery);
-                const spParam = filters[currentMode];
-                const finalUrl = `https://www.youtube.com/results?search_query=${encodedQuery}&sp=${spParam}`;
-                
-                searchInput.value = "";
-                
-                setTimeout(() => {
-                    window.location.replace(finalUrl);
-                }, 600);
-                return true;
-            }
-            
-          
+            modeHourBtn.addEventListener("click", () => { if (currentMode !== "hour") { currentMode = "hour"; applyModeUI(); showToast("Switched to Last Hour", "bi-hourglass-split"); } });
+            modeTodayBtn.addEventListener("click", () => { if (currentMode !== "today") { currentMode = "today"; applyModeUI(); showToast("Switched to Today", "bi-calendar-check"); } });
+            function triggerConfettiBurst() { for (let i = 0; i < 36; i++) { const conf = document.createElement("div"); conf.className = "confetti-piece-new"; const colors = ["#f97316","#ea580c","#f59e0b","#ef4444","#ec4899","#8b5cf6"]; conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; conf.style.left = Math.random() * window.innerWidth + "px"; conf.style.width = Math.random() * 9 + 6 + "px"; conf.style.height = Math.random() * 12 + 8 + "px"; conf.style.borderRadius = Math.random() > 0.5 ? "2px" : "50%"; conf.style.animationDuration = Math.random() * 1.2 + 0.8 + "s"; document.body.appendChild(conf); setTimeout(() => conf.remove(), 2000); } }
+            function showToast(msg, icon = "bi-info-circle") { const toast = document.getElementById("globalToast"); const span = document.getElementById("toastMsg"); if(!toast) return; span.innerHTML = `<i class="${icon} mr-1"></i> ${msg}`; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2300); }
+            function performSearch(query) { if (!query || query.trim().length < 3) { showToast("🔍 Type at least 3 characters!", "bi-emoji-frown"); return false; } if(isRedirecting) return false; isRedirecting = true; redirectHintDiv.classList.remove("hidden"); increaseDailyCount(); triggerConfettiBurst(); const finalUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(query.trim())}&sp=${filters[currentMode]}`; searchInput.value = ""; setTimeout(() => window.location.replace(finalUrl), 600); return true; }
             let debounceTimer;
-            searchInput.addEventListener("input", (e) => {
-                const val = e.target.value.trim();
-                if (debounceTimer) clearTimeout(debounceTimer);
-                if (val.length >= 3) {
-                    debounceTimer = setTimeout(() => {
-                        performSearch(val);
-                    }, 400);
-                }
-            });
-            
-          
-            pasteButton.addEventListener("click", async () => {
-                try {
-                    const clipboardText = await navigator.clipboard.readText();
-                    if (clipboardText && clipboardText.trim().length > 0) {
-                        searchInput.value = clipboardText.trim();
-                        if (clipboardText.trim().length >= 3) {
-                            performSearch(clipboardText.trim());
-                        } else {
-                            showToast("📋 Pasted text too short (min 3 letters)", "bi-clipboard-data");
-                        }
-                    } else {
-                        showToast("📭 Clipboard is empty", "bi-clipboard-x");
-                    }
-                } catch (err) {
-                    showToast(" Permission needed for clipboard", "bi-shield-exclamation");
-                }
-            });
-            
-          
-            document.addEventListener("visibilitychange", () => {
-                if (!document.hidden) {
-                    isRedirecting = false;
-                    redirectHintDiv.classList.add("hidden");
-                    if (searchInput) searchInput.value = "";
-                    updateDailyUI();
-                }
-            });
-            
-          
-            function initTheme() {
-                const savedTheme = localStorage.getItem("radheTheme") || "light";
-                if (savedTheme === "dark") {
-                    document.body.classList.add("dark-mode");
-                    themeIconSpan.classList.remove("bi-moon-fill");
-                    themeIconSpan.classList.add("bi-brightness-high-fill");
-                } else {
-                    document.body.classList.remove("dark-mode");
-                    themeIconSpan.classList.remove("bi-brightness-high-fill");
-                    themeIconSpan.classList.add("bi-moon-fill");
-                }
-            }
-            
-            themeBtn.addEventListener("click", () => {
-                if (document.body.classList.contains("dark-mode")) {
-                    document.body.classList.remove("dark-mode");
-                    localStorage.setItem("radheTheme", "light");
-                    themeIconSpan.classList.remove("bi-brightness-high-fill");
-                    themeIconSpan.classList.add("bi-moon-fill");
-                    showToast("Day mode activated", "bi-sun");
-                } else {
-                    document.body.classList.add("dark-mode");
-                    localStorage.setItem("radheTheme", "dark");
-                    themeIconSpan.classList.remove("bi-moon-fill");
-                    themeIconSpan.classList.add("bi-brightness-high-fill");
-                    showToast(" Dark mode on", "bi-moon-stars");
-                }
-            });
-            
-            
-            function createParticles() {
-                const container = document.getElementById('particles');
-                if (!container) return;
-                for (let i = 0; i < 35; i++) {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    const size = Math.random() * 70 + 15;
-                    particle.style.width = size + 'px';
-                    particle.style.height = size + 'px';
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.animationDelay = Math.random() * 20 + 's';
-                    particle.style.animationDuration = Math.random() * 18 + 12 + 's';
-                    particle.style.opacity = Math.random() * 0.35 + 0.1;
-                    particle.style.background = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`;
-                    container.appendChild(particle);
-                }
-            }
-            
-          
-            const allButtons = document.querySelectorAll("button");
-            allButtons.forEach(btn => {
-                btn.addEventListener("touchstart", function(e) {
-                    if (!this.disabled) this.style.transform = "scale(0.96)";
-                });
-                btn.addEventListener("touchend", function() {
-                    this.style.transform = "";
-                });
-                btn.addEventListener("mouseleave", function() {
-                    this.style.transform = "";
-                });
-                btn.addEventListener("mousedown", function() {
-                    if (!this.disabled) this.style.transform = "scale(0.97)";
-                });
-                btn.addEventListener("mouseup", function() {
-                    this.style.transform = "";
-                });
-            });
-            
-            searchInput.classList.add("focus:ring-2", "focus:ring-orange-400");
-            
-          
-            applyModeUI();
-            updateDailyUI();
-            initTheme();
-            createParticles();
-            
+            searchInput.addEventListener("input", (e) => { const val = e.target.value.trim(); if(debounceTimer) clearTimeout(debounceTimer); if(val.length >= 3) debounceTimer = setTimeout(() => performSearch(val), 400); });
+            pasteButton.addEventListener("click", async () => { try { const txt = await navigator.clipboard.readText(); if(txt && txt.trim().length > 0) { searchInput.value = txt.trim(); if(txt.trim().length >= 3) performSearch(txt.trim()); else showToast("📋 Pasted text too short (min 3 letters)", "bi-clipboard-data"); } else showToast("📭 Clipboard is empty", "bi-clipboard-x"); } catch(err) { showToast("Permission needed", "bi-shield-exclamation"); } });
+            document.addEventListener("visibilitychange", () => { if(!document.hidden) { isRedirecting = false; redirectHintDiv.classList.add("hidden"); if(searchInput) searchInput.value = ""; updateDailyUI(); } });
+            function initTheme() { const saved = localStorage.getItem("radheTheme") || "light"; if(saved === "dark") { document.body.classList.add("dark-mode"); themeIconSpan.classList.remove("bi-moon-fill"); themeIconSpan.classList.add("bi-brightness-high-fill"); } else { document.body.classList.remove("dark-mode"); themeIconSpan.classList.remove("bi-brightness-high-fill"); themeIconSpan.classList.add("bi-moon-fill"); } }
+            themeBtn.addEventListener("click", () => { if(document.body.classList.contains("dark-mode")) { document.body.classList.remove("dark-mode"); localStorage.setItem("radheTheme","light"); themeIconSpan.classList.remove("bi-brightness-high-fill"); themeIconSpan.classList.add("bi-moon-fill"); showToast("Day mode activated","bi-sun"); } else { document.body.classList.add("dark-mode"); localStorage.setItem("radheTheme","dark"); themeIconSpan.classList.remove("bi-moon-fill"); themeIconSpan.classList.add("bi-brightness-high-fill"); showToast("Dark mode on","bi-moon-stars"); } });
+            function createParticles() { const container = document.getElementById('particles'); if(!container) return; for(let i=0;i<35;i++){ const p=document.createElement('div'); p.className='particle'; const s=Math.random()*70+15; p.style.width=s+'px'; p.style.height=s+'px'; p.style.left=Math.random()*100+'%'; p.style.animationDelay=Math.random()*20+'s'; p.style.animationDuration=Math.random()*18+12+'s'; p.style.opacity=Math.random()*0.35+0.1; p.style.background=`rgba(255,255,255,${Math.random()*0.3+0.1})`; container.appendChild(p); } }
+            applyModeUI(); updateDailyUI(); initTheme(); createParticles();
         })();
     </script>
 </body>
